@@ -1,0 +1,38 @@
+.container {
+  padding: 8px 16px 16px;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0 16px;
+  height: 44px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--color-text);
+  padding: 0;
+  margin: 0;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  color: var(--color-muted);
+  flex-shrink: 0;
+  margin-left: 8px;
+}

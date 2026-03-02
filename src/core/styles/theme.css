@@ -1,0 +1,49 @@
+/* DARK */
+:root[data-theme="dark"] {
+    --color-bg: #0E0F14;
+    --color-surface: #202126;
+    --color-border: #636367;
+
+    --color-text: #FFFEFE;
+    --color-muted: #5C5C5C;
+
+    --color-primary: #FFFFFF;
+    --color-on-primary: #000000;
+
+    /* NAVBAR */
+    --color-bg-navbar: #15151B;
+    --color-text-navbar: #7C7C7C;
+    --color-text-selected-navbar: none;
+
+    /* SIDEBAR */
+    --color-bg-sidebar: #0E0F14;
+    --color-text-sidebar: "#FFFFFFC7 78%";
+
+    /* COLORS */
+    --color-text-succeed: #02B471;
+    --color-text-failed: #B4022C;
+    --color-input-field: #25262F;
+
+    /* ON HOVER COLORS */
+    --color-muted-on-hover: #6e6e6e;
+}
+
+
+
+/* For future light theme */
+:root[data-theme='light']{
+    --color-bg: none;
+    --color-surface: none;
+    --color-border: none;
+
+    --color-text: none;
+    --color-muted: none;
+
+    --color-primary: none;
+    --color-on-primary: none;
+
+    /* NAVBAR */
+    --color-bg-navbar: none;
+    --color-text-navbar: none;
+    --color-text-selected-navbar: none;
+}

@@ -1,0 +1,144 @@
+/* ===== Backdrop ===== */
+.backdrop {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  align-items: flex-start;
+
+  padding-top: 64px;
+  padding-left: 10px;
+
+  z-index: 999;
+
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(8px) saturate(1.1);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
+}
+
+/* ===== Modal ===== */
+.modal {
+  width: 220px;
+  max-width: calc(100% - 20px);
+
+  background: var(--color-bg-sidebar);
+  color: var(--color-text);
+  font-weight: 500;
+  border-radius: 16px;
+  overflow: hidden;
+
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.55);
+
+  animation: dropIn 180ms ease-out both;
+}
+
+@keyframes dropIn {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ===== Content ===== */
+.searchBlock {
+  padding: 14px 14px 6px;
+}
+
+.searchText {
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--color-muted);
+  margin-bottom: 10px;
+}
+
+/* ===== Account ===== */
+.accountRow {
+  width: 100%;
+  border: none;
+  background: var(--color-surface);
+  border-radius: 10px;
+
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.accountRow div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconWrap {
+  width: 30px;
+  height: 30px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  display: block;
+}
+
+.accountName {
+  font-size: 15px;
+  flex: 1;
+}
+
+.balance {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+/* ===== Divider ===== */
+.divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 8px 0;
+}
+
+/* ===== Menu ===== */
+.menuItem {
+  width: 100%;
+  border: none;
+  background: transparent;
+
+  padding: 12px 14px;
+  font-size: 16px;
+
+  color: var(--color-text);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+}
+
+.menuItem:hover {
+  background: var(--color-bg);
+}
+
+.chevron {
+  font-size: 22px;
+  line-height: 1;
+  color: var(--color-muted);
+  transform: translateY(-1px);
+}
+
+.danger {
+  color: var(--color-text);
+}

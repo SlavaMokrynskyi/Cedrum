@@ -1,0 +1,114 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background-color: var(--color-bg);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0 24px;
+}
+
+.backButton,
+.infoButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+/* Languages List */
+.languagesList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 24px;
+}
+
+.languageItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a2a35;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.languageItem:hover {
+  background-color: #3a3a45;
+}
+
+.languageItem.selected {
+  border-color: #2563eb;
+  background-color: rgba(37, 99, 235, 0.1);
+}
+
+.languageName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.checkmark {
+  position: absolute;
+  right: 16px;
+  color: #2563eb;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Continue Button */
+.continueButton {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #000000;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  margin-bottom: 20px;
+}
+
+.continueButton:hover {
+  opacity: 0.9;
+}
+
+.continueButton.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.continueButton.disabled:hover {
+  opacity: 0.4;
+}

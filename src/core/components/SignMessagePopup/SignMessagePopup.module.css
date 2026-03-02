@@ -1,0 +1,277 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  background-color: var(--color-bg);
+  padding: 0 20px 20px;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff transparent;
+}
+
+.container::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 999px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 0;
+  margin: 0 -20px;
+  width: calc(100% + 40px);
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+}
+
+.headerDivider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 0 -20px 24px;
+  width: calc(100% + 40px);
+}
+
+.dappSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.dappIcon {
+  width: 64px;
+  height: 64px;
+  background-color: #000;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dappIconImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 28px solid #fff;
+}
+
+.dappInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.url {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0;
+}
+
+.block {
+  background-color: #2a2a35;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.blockHeader {
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.siteHost {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 6px;
+  word-break: break-word;
+}
+
+.siteText {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.messageContent {
+  font-size: 16px;
+  color: var(--color-text);
+  text-align: center;
+  padding: 8px 0;
+}
+
+.networkRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.networkLabel {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.networkValue {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.warning {
+  text-align: center;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 24px 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 12px;
+  margin-top: auto;
+  padding-bottom: 20px;
+}
+
+.cancelButton,
+.signButton {
+  flex: 1;
+  padding: 14px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cancelButton {
+  background-color: #2a2a35;
+  color: var(--color-text);
+}
+
+.signButton {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.cancelButton:hover,
+.signButton:hover {
+  opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 24px 24px;
+  }
+
+  .header {
+    margin: 0 -24px;
+    width: calc(100% + 48px);
+    padding: 20px 0;
+  }
+
+  .headerDivider {
+    margin: 0 -24px 32px;
+    width: calc(100% + 48px);
+  }
+
+  .dappSection {
+    margin-bottom: 40px;
+    gap: 20px;
+  }
+
+  .dappIcon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .triangle {
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-bottom: 32px solid #fff;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .url {
+    font-size: 15px;
+  }
+
+  .block {
+    padding: 20px;
+    margin-bottom: 16px;
+  }
+
+  .blockHeader {
+    font-size: 16px;
+  }
+
+  .messageContent {
+    font-size: 17px;
+  }
+
+  .warning {
+    font-size: 15px;
+    margin: 32px 0;
+  }
+
+  .buttonGroup {
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .cancelButton,
+  .signButton {
+    padding: 16px 28px;
+    font-size: 17px;
+  }
+}

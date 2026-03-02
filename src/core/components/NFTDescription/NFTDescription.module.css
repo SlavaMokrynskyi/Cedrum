@@ -1,0 +1,138 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--color-bg);
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 0;
+    margin-bottom: 12px;
+}
+
+.backButton,
+.infoButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    transition: opacity 0.2s ease;
+}
+
+.backButton:hover,
+.infoButton:hover {
+    opacity: 0.7;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.nftImage {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 16px;
+    background-color: #d1d1d1;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+    border-radius: 16px;
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    margin-bottom: 12px;
+}
+
+.nftName {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 12px 0;
+    text-align: center;
+}
+
+.detailsCard {
+    width: 100%;
+    background-color: #1C1D22;
+    border-radius: 10px;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.detailsLabel {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 6px 0;
+}
+
+.detailsText {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.sendButton {
+    width: 100%;
+    margin: 0 auto;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.sendButton:hover {
+    opacity: 0.9;
+}
+
+.sendButton:active {
+    transform: scale(0.98);
+}
+
+.errorState {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    color: var(--color-text);
+    font-size: 14px;
+}

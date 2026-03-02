@@ -1,0 +1,228 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: var(--color-bg);
+  padding: 0 12px 12px;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: #ffffff transparent;
+}
+
+.container::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #ffffff;
+  border-radius: 999px;
+}
+
+.closeButton {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+}
+
+.closeIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.headerDivider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+}
+
+.iconSection {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.dappIcon {
+  width: 64px;
+  height: 64px;
+  background-color: #000;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-bottom: 28px solid #fff;
+}
+
+.urlSection {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.mainUrl {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 4px 0;
+}
+
+.subUrl {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 0;
+}
+
+.divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin-bottom: 16px;
+}
+
+.permissionsSection {
+  margin-bottom: 20px;
+}
+
+.permissionsTitle {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 12px 0;
+}
+
+.permissionItem {
+  background-color: #2a2a35;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: var(--color-text);
+  text-align: center;
+}
+
+.warning {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.4);
+  margin: 16px 0;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+  padding-bottom: 16px;
+}
+
+.cancelButton,
+.connectButton {
+  flex: 1;
+  padding: 12px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cancelButton {
+  background-color: #2a2a35;
+  color: var(--color-text);
+}
+
+.connectButton {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+.cancelButton:hover,
+.connectButton:hover {
+  opacity: 0.9;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 24px 24px;
+  }
+
+  .header {
+    margin: 0 -24px;
+    width: calc(100% + 48px);
+    padding: 20px 0;
+  }
+
+  .headerDivider {
+    margin: 0 -24px 32px;
+    width: calc(100% + 48px);
+  }
+
+  .iconSection {
+    margin-bottom: 32px;
+  }
+
+  .dappIcon {
+    width: 96px;
+    height: 96px;
+  }
+
+  .triangle {
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-bottom: 40px solid #fff;
+  }
+
+  .mainUrl {
+    font-size: 36px;
+  }
+
+  .subUrl {
+    font-size: 18px;
+  }
+
+  .permissionsTitle {
+    font-size: 16px;
+  }
+
+  .permissionItem {
+    padding: 16px 20px;
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .warning {
+    font-size: 15px;
+    margin: 32px 0;
+  }
+
+  .buttonGroup {
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+
+  .cancelButton,
+  .connectButton {
+    padding: 16px 28px;
+    font-size: 17px;
+  }
+}

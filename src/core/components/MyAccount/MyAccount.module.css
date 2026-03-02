@@ -1,0 +1,99 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100%;
+    background-color: var(--color-bg);
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.backButton {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    z-index: 10;
+}
+
+.backIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 40px;
+    margin-top: 0;
+}
+
+.menu {
+    width: 100%;
+    background-color: var(--color-surface, #1e1e24);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+@media (min-width: 600px) {
+    .menu {
+        max-width: 600px;
+    }
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text);
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid var(--color-border, rgba(255,255,255,0.1));
+}
+
+.menuItem:last-child {
+    border-bottom: none;
+}
+
+.menuItem:hover {
+    background-color: var(--color-surface-hover, rgba(255,255,255,0.05));
+}
+
+.menuLabel {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--color-text);
+}
+
+.chevron {
+    width: 20px;
+    height: 20px;
+    color: var(--color-text);
+    opacity: 0.5;
+}
+
+.danger .menuLabel {
+    color: #ff4444;
+}
+
+.danger:hover {
+    background-color: rgba(255, 68, 68, 0.1);
+}

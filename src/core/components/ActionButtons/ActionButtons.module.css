@@ -1,0 +1,54 @@
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  padding: 16px 8px 24px;
+  gap: 8px;
+}
+
+.button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  transition: opacity 0.2s;
+  flex: 1;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button:hover .iconWrapper {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.iconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #2a2a2f;
+  border: 1px solid #3a3a3f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.iconWrapper svg {
+  width: 22px;
+  height: 22px;
+  color: #8a8a8f;
+  overflow: hidden;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+}

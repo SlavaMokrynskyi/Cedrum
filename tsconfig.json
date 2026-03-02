@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    // "target": "es5",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "esnext",
+      "ES2021"
+    ],
+    "allowJs": false,
+    "disableSizeLimit": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": false,
+    "jsx": "react",
+    "baseUrl": "src",
+    "paths": {
+      "core/*": ["./core/*"],
+      "pages/*": ["./pages/*"],
+    },
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src",
+    "src/components",
+    "src/chrome.d.ts",
+  ]
+}

@@ -1,0 +1,15 @@
+.container {
+  padding: 0 16px;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 8px 0 16px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}

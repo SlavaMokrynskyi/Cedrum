@@ -1,0 +1,183 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  height: 48px;
+  position: relative;
+}
+
+.backButton,
+.infoButton {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  z-index: 1;
+}
+
+.backIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.infoIcon {
+  width: 20px;
+  height: 20px;
+}
+
+.title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.content {
+  flex: 1;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.nftImageContainer {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.nftImage {
+  width: 160px;
+  height: 160px;
+  border-radius: 14px;
+  object-fit: cover;
+}
+
+.nftImagePlaceholder {
+  width: 160px;
+  height: 160px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #e0e0e0 0%, #c0c0c0 100%);
+}
+
+.nftInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+}
+
+.nftName {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.nftCollection {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.inputWrapper {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  color: var(--color-text);
+  padding: 0;
+  margin: 0;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.footer {
+  padding: 12px;
+  padding-bottom: 20px;
+}
+
+.transferButton {
+  width: 100%;
+  padding: 14px;
+  background: #ffffff;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.transferButton:hover {
+  opacity: 0.9;
+}
+
+.transferButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.errorContainer {
+  margin: 0 12px;
+  padding: 10px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+}
+
+.errorMessage {
+  display: block;
+  font-size: 13px;
+  color: #ef4444;
+  margin-bottom: 4px;
+}
+
+.errorHint {
+  display: block;
+  font-size: 11px;
+  color: rgba(239, 68, 68, 0.7);
+  font-family: monospace;
+  word-break: break-all;
+}

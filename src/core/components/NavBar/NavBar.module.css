@@ -1,0 +1,84 @@
+.navbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 64px;
+  padding: 8px 20px 12px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+
+  background: #15151B;
+  border-top: 1px solid var(--color-border);
+  backdrop-filter: blur(10px);
+
+  z-index: 10;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+
+  color: var(--color-text-navbar);
+  font: 500 13px/1 system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  letter-spacing: 0.2px;
+
+  opacity: 0.75;
+  scale: 1;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.itemText{
+    font-weight: 500;
+    font-size: 13px;
+}
+
+.item:hover {
+  opacity: 1;
+  transition: 0.2s;
+  scale: 1.03;
+}
+
+.iconWrap {
+  width: 44px;
+  height: 44px;
+
+  display: grid;
+  place-items: center;
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+}
+
+.itemActive {
+  color: var(--color-primary);
+  opacity: 1;
+}
+
+.itemActive .iconWrap {
+  border-color: var(--color-primary);
+}
+
+.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  background: transparent;
+}
+
+.itemActive .dot {
+  background: var(--color-primary);
+}

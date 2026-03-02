@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#000000" />
+    <link rel="manifest" href="/manifest.json" />
+    <title>Cedrum Wallet</title>
+    <script>
+      (function () {
+        var hash = window.location.hash || "";
+        var searchParams = new URLSearchParams(window.location.search || "");
+        var isPopupRoute =
+          hash.startsWith("#/popup/confirm-connect") ||
+          hash.startsWith("#/popup/sign-message") ||
+          hash.startsWith("#/popup/sign-transaction");
+        var isUnlockPopup =
+          hash.startsWith("#/wallet/unlock") &&
+          searchParams.get("unlock") === "true";
+
+        if (isPopupRoute || isUnlockPopup) {
+          document.documentElement.setAttribute("data-window-flow", "true");
+        }
+      })();
+    </script>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        width: 360px;
+        height: 640px;
+        overflow: hidden;
+        background-color: #0e0f14;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      html[data-window-flow="true"],
+      html[data-window-flow="true"] body,
+      html[data-window-flow="true"] #root {
+        width: 100vw !important;
+        height: 100vh !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+      }
+
+      body {
+        position: fixed;
+        inset: 0;
+      }
+
+      html[data-window-flow="true"] body {
+        position: static;
+        inset: auto;
+      }
+
+      #root {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-color: #0e0f14;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      html::-webkit-scrollbar,
+      body::-webkit-scrollbar,
+      #root::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/index.tsx"></script>
+  </body>
+</html>

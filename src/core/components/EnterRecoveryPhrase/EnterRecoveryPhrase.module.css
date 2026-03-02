@@ -1,0 +1,126 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    height: 100%;
+    background-color: var(--color-bg);
+    padding: 16px;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-height: 600px) {
+    .content {
+        padding-top: 50px;
+    }
+}
+
+.backButton {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    z-index: 10;
+}
+
+.backIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+
+@media (min-width: 600px) {
+    .content {
+        max-width: 600px;
+    }
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 40px 0;
+    text-align: center;
+}
+
+.phraseGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.wordField {
+    display: flex;
+    align-items: center;
+    background-color: #2a2a35;
+    border-radius: 8px;
+    padding: 8px 10px;
+    gap: 4px;
+}
+
+.wordNumber {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    min-width: 16px;
+}
+
+.inputField {
+    flex: 1;
+    background: none;
+    border: none;
+    color: var(--color-text);
+    font-size: 13px;
+    outline: none;
+    padding: 0;
+    width: 100%;
+}
+
+.continueButton {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    margin: auto auto 8px;
+    margin-bottom: 42px;
+}
+
+@media (min-width: 600px) {
+    .continueButton {
+        max-width: 600px;
+    }
+}
+
+.continueButton:hover {
+    opacity: 0.9;
+}
+
+.continueButton:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

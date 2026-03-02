@@ -1,0 +1,397 @@
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  background-color: var(--color-bg);
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0 16px;
+  margin-bottom: 8px;
+}
+
+.backButton,
+.filterButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  position: relative;
+}
+
+.filterDot {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--color-primary);
+  border-radius: 50%;
+}
+
+.icon {
+  width: 24px;
+  height: 24px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  background: var(--color-bg);
+  border-radius: 20px 20px 0 0;
+  padding: 20px;
+  box-sizing: border-box;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modalTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.modalClose {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--color-text);
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.filterSection {
+  margin-bottom: 20px;
+}
+
+.filterLabel {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 10px;
+}
+
+.filterOptions {
+  display: flex;
+  gap: 8px;
+}
+
+.filterOption {
+  flex: 1;
+  padding: 10px 12px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-muted);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.filterOption:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.filterOptionActive {
+  background: var(--color-surface);
+  border-color: var(--color-primary);
+  color: var(--color-text);
+}
+
+.dateInputs {
+  display: flex;
+  gap: 12px;
+}
+
+.dateField {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dateLabel {
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.dateInput {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  color: var(--color-text);
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.dateInput:focus {
+  outline: none;
+  border-color: var(--color-primary);
+}
+
+.modalFooter {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.clearButton {
+  flex: 1;
+  padding: 14px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 10px;
+  color: var(--color-text);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.clearButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.clearButton:active {
+  transform: scale(0.97);
+}
+
+.applyButton {
+  flex: 1;
+  padding: 14px;
+  background: #ffffff;
+  border: none;
+  border-radius: 10px;
+  color: #000000;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.applyButton:hover {
+  background: #f0f0f0;
+}
+
+.applyButton:active {
+  transform: scale(0.97);
+}
+
+.transactionsList {
+  flex: 1;
+  max-height: 100%;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding-right: 4px;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #bdbdbd var(--color-bg);
+}
+
+.transactionsList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.transactionsList::-webkit-scrollbar-track {
+  background: var(--color-bg);
+  border-radius: 4px;
+}
+
+.transactionsList::-webkit-scrollbar-thumb {
+  background: #bdbdbd;
+  border-radius: 4px;
+  border: 2px solid var(--color-bg);
+  min-height: 24px;
+}
+
+.transactionsList::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+.emptyState {
+  flex-shrink: 0;
+  text-align: center;
+  padding: 3rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+
+.transactionCard {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #1C1D22;
+  border-radius: 16px;
+  padding: 12px 14px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.transactionCard:hover {
+  background-color: #25262b;
+}
+
+.transactionCard:active {
+  background-color: #1C1D22;
+}
+
+.iconCircle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
+  margin-right: 12px;
+  overflow: hidden;
+}
+
+.iconCircle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.middleSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.addressRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.addressLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 400;
+  flex-shrink: 0;
+}
+
+.address {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  font-family: 'Courier New', monospace;
+  font-weight: 500;
+}
+
+.amountRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.amount {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.sign {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.incoming {
+  color: #10b981;
+}
+
+.outgoing {
+  color: #ef4444;
+}
+
+.rightSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  margin-left: 8px;
+}
+
+.dateRow {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.timeRow {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4);
+  font-weight: 500;
+}

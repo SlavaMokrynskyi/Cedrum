@@ -1,0 +1,113 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    background-color: var(--main-bg-color);
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+@media (max-height: 600px) {
+    .container {
+        padding: 20px;
+    }
+}
+
+.backButton {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    z-index: 10;
+}
+
+.backIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text);
+    margin-bottom: 30px;
+    margin-top: 0;
+}
+
+.logo {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 30px;
+    color: var(--color-text);
+}
+
+.description {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-text);
+    margin-bottom: 40px;
+    text-align: center;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+    .description {
+        max-width: 480px;
+    }
+    
+    .buttonGroup {
+        max-width: 480px;
+    }
+}
+
+.showPhraseButton {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.showPhraseButton:hover {
+    opacity: 0.9;
+}
+
+.logOutButton {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+    background-color: #cc0000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.logOutButton:hover {
+    opacity: 0.9;
+}

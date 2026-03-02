@@ -1,0 +1,139 @@
+ .container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     height: 100%;
+     max-height: 100vh;
+     min-height: 0;
+     background-color: var(--color-bg);
+     padding: 20px;
+     box-sizing: border-box;
+     position: relative;
+ }
+
+.backButton {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    z-index: 10;
+}
+
+.backIcon {
+    width: 24px;
+    height: 24px;
+}
+
+.title {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin: 0 0 24px 0;
+    text-align: center;
+}
+
+.copyMessage {
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #22c55e;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 100;
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.networkSelector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #2a2a35;
+    border-radius: 24px;
+    padding: 6px 16px;
+    margin-bottom: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.networkIcon {
+    width: 24px;
+    height: 24px;
+    background-color: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cedraIcon {
+    width: 14px;
+    height: 14px;
+    color: white;
+}
+
+.networkName {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text);
+}
+
+.dropdownIcon {
+    width: 16px;
+    height: 16px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.walletsList {
+    flex: 1;
+    min-height: 0;
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.walletsList::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.addWalletButton {
+    background: none;
+    border: none;
+    color: #2563eb;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: opacity 0.2s;
+}
+
+.addWalletButton:hover {
+    opacity: 0.8;
+}

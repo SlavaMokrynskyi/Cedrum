@@ -1,0 +1,6 @@
+.backIcon,
+.infoIcon{
+    width: 28px;
+    height: 28px;
+    color: var(--color-muted);
+}

@@ -1,0 +1,95 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+    background-color: var(--color-bg);
+    padding: 40px 20px;
+    box-sizing: border-box;
+    gap: 60px;
+}
+
+@media (max-height: 600px) {
+    .container {
+        padding: 20px;
+        gap: 30px;
+    }
+    
+    .logo {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .title {
+        font-size: 32px;
+    }
+}
+
+.logoSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+    color: var(--color-text);
+}
+
+.title {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+@media (min-width: 600px) {
+    .buttonGroup {
+        max-width: 480px;
+    }
+}
+
+.createWalletButton {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #000000;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.createWalletButton:hover {
+    opacity: 0.9;
+}
+
+.importWalletButton {
+    width: 100%;
+    padding: 16px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: #2a2a35;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.importWalletButton:hover {
+    background-color: #3a3a45;
+}
