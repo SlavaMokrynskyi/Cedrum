@@ -4,14 +4,13 @@ import { CedrumLogoSvg } from "core/image/CedrumLogoSvg";
 import { ArrowLeftSvg } from "core/image/ArrowLeftSvg";
 import { ReactComponent as EyeOffIcon } from "core/image/EyeOffSvg";
 import { ReactComponent as EyeIcon } from "core/image/EyeSvg";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useWalletState from "core/hooks/useWalletState";
-import { validField, validPassword } from "core/utils/helper";
 import { unlockSession } from "core/utils/lock";
 import { Account, Ed25519PrivateKey } from "@cedra-labs/ts-sdk";
 import { PATH_CEDRA_COIN } from "core/constants";
 import { setMnemonicVault } from "core/utils/seedPhrase";
+import { closeFullscreenExtensionView } from "core/utils/extensionView";
 
 type LocationState = { privateKey: string; recoveryPhrase: string };
 
@@ -24,7 +23,10 @@ const passwordRequirements: PasswordRequirement[] = [
   { label: "At least 8 characters", test: (p) => p.length >= 8 },
   { label: "At least one letter", test: (p) => /[A-Za-z]/.test(p) },
   { label: "At least one number", test: (p) => /\d/.test(p) },
-  { label: "At least one special character (@$!%*#?&)", test: (p) => /[@$!%*#?&]/.test(p) },
+  {
+    label: "At least one special character (@$!%*#?&)",
+    test: (p) => /[@$!%*#?&]/.test(p),
+  },
 ];
 
 export default function CreatePassword() {
@@ -36,7 +38,7 @@ export default function CreatePassword() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { createWalletState, cedraNetwork } = useWalletState();
+  const { createWalletState } = useWalletState();
 
   const state = location.state as LocationState | null;
 
@@ -45,15 +47,16 @@ export default function CreatePassword() {
 
   const passwordValue = password || "";
   const confirmPasswordValue = confirmPassword || "";
-  
+
   const metRequirements = passwordRequirements.map((req) => ({
     ...req,
     met: req.test(passwordValue),
   }));
-  
+
   const allRequirementsMet = metRequirements.every((r) => r.met);
-  const passwordsMatch = passwordValue === confirmPasswordValue && passwordValue.length > 0;
-  
+  const passwordsMatch =
+    passwordValue === confirmPasswordValue && passwordValue.length > 0;
+
   const isValid = allRequirementsMet && passwordsMatch;
 
   const passwordOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -64,13 +67,10 @@ export default function CreatePassword() {
     setConfirmPassword(e.target.value);
   };
 
-  const finishRegistration = () => {
-    const isFullScreenWindow =
-      window.outerWidth >= window.screen.availWidth &&
-      window.outerHeight >= window.screen.availHeight;
+  const finishRegistration = async () => {
+    const isClosed = await closeFullscreenExtensionView();
 
-    if (isFullScreenWindow) {
-      window.close();
+    if (isClosed) {
       return;
     }
 
@@ -83,18 +83,23 @@ export default function CreatePassword() {
     try {
       if (privateKey && recoveryPhrase) {
         const ed25519PrivateKey = new Ed25519PrivateKey(privateKey);
-        const account = Account.fromPrivateKey({privateKey:ed25519PrivateKey});
-        await createWalletState(
-          { account: account, path: `${PATH_CEDRA_COIN}/0'`, walletName: null }
-        );
+        const account = Account.fromPrivateKey({
+          privateKey: ed25519PrivateKey,
+        });
+
+        await createWalletState({
+          account,
+          path: `${PATH_CEDRA_COIN}/0'`,
+          walletName: null,
+        });
         await setMnemonicVault(recoveryPhrase, password!);
         await unlockSession(password!);
-        finishRegistration();
+        await finishRegistration();
       } else {
         navigate("/auth/recovery-phrase", {
           state: {
-            password : password
-          }
+            password,
+          },
         });
       }
     } catch (error) {
@@ -111,7 +116,9 @@ export default function CreatePassword() {
       <div className={styles.content}>
         <CedrumLogoSvg className={styles.logo} />
         <h1 className={styles.title}>Create a password</h1>
-        <h2 className={styles.subtitle}>You will use this to unlock your wallet</h2>
+        <h2 className={styles.subtitle}>
+          You will use this to unlock your wallet
+        </h2>
 
         <div className={styles.inputGroup}>
           <div className={styles.passwordField}>
@@ -128,10 +135,14 @@ export default function CreatePassword() {
               onClick={() => setShowPassword(!showPassword)}
               aria-label={showPassword ? "Hide password" : "Show password"}
             >
-              {showPassword ? <EyeIcon className={styles.eyeIcon} /> : <EyeOffIcon className={styles.eyeIcon} />}
+              {showPassword ? (
+                <EyeIcon className={styles.eyeIcon} />
+              ) : (
+                <EyeOffIcon className={styles.eyeIcon} />
+              )}
             </button>
           </div>
-          
+
           {passwordValue.length > 0 && (
             <div className={styles.requirementsList}>
               {metRequirements.map((req, index) => (
@@ -140,14 +151,14 @@ export default function CreatePassword() {
                   className={`${styles.requirement} ${req.met ? styles.requirementMet : ""}`}
                 >
                   <span className={styles.requirementIcon}>
-                    {req.met ? "✓" : "○"}
+                    {String.fromCharCode(req.met ? 10003 : 9675)}
                   </span>
                   <span>{req.label}</span>
                 </div>
               ))}
             </div>
           )}
-          
+
           <div className={styles.passwordField}>
             <input
               className={styles.passwordInput}
@@ -160,20 +171,26 @@ export default function CreatePassword() {
               type="button"
               className={styles.eyeButton}
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              aria-label={showConfirmPassword ? "Hide password" : "Show password"}
+              aria-label={
+                showConfirmPassword ? "Hide password" : "Show password"
+              }
             >
-              {showConfirmPassword ? <EyeIcon className={styles.eyeIcon} /> : <EyeOffIcon className={styles.eyeIcon} />}
+              {showConfirmPassword ? (
+                <EyeIcon className={styles.eyeIcon} />
+              ) : (
+                <EyeOffIcon className={styles.eyeIcon} />
+              )}
             </button>
           </div>
-          
+
           {confirmPasswordValue.length > 0 && !passwordsMatch && (
             <span className={styles.matchError}>Passwords do not match</span>
           )}
         </div>
       </div>
 
-      <button 
-        className={styles.continueButton} 
+      <button
+        className={styles.continueButton}
         onClick={handleNextStep}
         disabled={!isValid}
       >

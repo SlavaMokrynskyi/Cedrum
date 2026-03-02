@@ -3,6 +3,7 @@
 
 import { useState, useCallback, useMemo, useEffect } from "react";
 import constate from "constate";
+import { DEFAULT_LANGUAGE } from "core/constants";
 import {
   getAccountsStateFromStorage,
   getSelectedAccountFromStorage,
@@ -82,10 +83,7 @@ export default function useWalletState() {
 
   const [language, setLanguage] = useState<
     UpdateLanguageProps | null | undefined
-  >({
-    name: "English",
-    shortName: "EN",
-  });
+  >(DEFAULT_LANGUAGE);
 
   /* ---------------- Network ---------------- */
 
@@ -270,7 +268,7 @@ export default function useWalletState() {
       // lists
       setCedraAccounts(accounts ?? []);
       setAddressbookList(addressBook ?? null);
-      setLanguage(lang ?? { name: "English", shortName: "EN" });
+      setLanguage(lang ?? DEFAULT_LANGUAGE);
 
       if (!selectedAccount || !mnemonic) return;
 

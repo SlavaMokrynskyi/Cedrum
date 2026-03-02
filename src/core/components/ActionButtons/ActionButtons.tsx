@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./ActionButtons.module.css";
+import { DEFAULT_TOKEN_SYMBOL } from "core/constants";
 
 const BuyIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -56,11 +57,11 @@ export default function ActionButtons() {
 
   const handleReceive = () => {
     navigate("/wallet/receive");
-  }
+  };
 
   const handleSend = () => {
     navigate("/wallet/send-token", {
-      state: { symbol: "CED" }
+      state: { symbol: DEFAULT_TOKEN_SYMBOL },
     });
   };
 

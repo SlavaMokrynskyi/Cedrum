@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./ConfirmConnect.module.css";
-import { CedrumLogoSvg } from "core/image/CedrumLogoSvg";
 import { MessageMethod } from "core/types";
 
 export default function ConfirmConnect() {

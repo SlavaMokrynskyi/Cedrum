@@ -1,8 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./SignTxnPopup.module.css";
-import { CedrumLogoSvg } from "core/image/CedrumLogoSvg";
-import { CloseIconSvg } from "core/image/CloseIconSvg";
 import { MessageMethod } from "core/types";
+import { CEDRA_OCTAS_PER_COIN } from "core/constants";
 
 const ChevronDownSvg = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -38,7 +37,7 @@ type ApprovalPreview = {
   } | null;
 };
 
-const OCTAS_PER_CED = BigInt(100_000_000);
+const OCTAS_PER_CED = BigInt(CEDRA_OCTAS_PER_COIN);
 
 const formatOctasToCed = (value: string | number | null | undefined) => {
   if (value === null || typeof value === "undefined") return "N/A";

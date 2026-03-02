@@ -98,7 +98,6 @@ export default function UnlockBody() {
         <button
           type="button"
           className={styles.forgotPassword}
-          onClick={() => console.log("forgot password")}
           disabled
           hidden
         >

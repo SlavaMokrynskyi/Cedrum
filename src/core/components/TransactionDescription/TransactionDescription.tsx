@@ -1,9 +1,11 @@
 import React from "react";
 import styles from "./TransactionDescription.module.css";
 import { ArrowLeftSvg } from "core/image/ArrowLeftSvg";
-import { useNavigate, useLocation } from "react-router-dom";
+import CedraLogo from "core/image/CedraLogo.png";
+import { useLocation, useNavigate } from "react-router-dom";
 import { TransactionResponseType } from "@cedra-labs/ts-sdk";
 import useWalletState from "core/hooks/useWalletState";
+import { CEDRA_OCTAS_PER_COIN, CEDRASCAN_TX_URL } from "core/constants";
 
 interface DisplayData {
   type: TransactionResponseType;
@@ -46,7 +48,7 @@ export default function TransactionDescription() {
     gas_used: "-",
     success: true,
   };
-  
+
   const tx = displayData || fallback;
   const isCanceled = tx.success === false;
   const isPending = tx.type === TransactionResponseType.Pending;
@@ -54,16 +56,19 @@ export default function TransactionDescription() {
 
   const formatGasFee = (gasUsed?: string) => {
     if (!gasUsed || gasUsed === "-") return "0.0000000 CED";
+
     const gasNum = Number(gasUsed);
     if (isNaN(gasNum)) return "0.0000000 CED";
-    const cedAmount = gasNum / 100_000_000;
+
+    const cedAmount = gasNum / CEDRA_OCTAS_PER_COIN;
     return `${cedAmount.toFixed(7)} CED`;
   };
 
   const handleShare = () => {
-    const cedraScanUrl = `https://cedrascan.com/txn/${tx.hash}?network=${cedraNetwork}`;
-    window.open(cedraScanUrl, "_blank");
+    const cedraScanUrl = `${CEDRASCAN_TX_URL}/${tx.hash}?network=${cedraNetwork}`;
+    window.open(cedraScanUrl, "_blank", "noopener,noreferrer");
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -78,7 +83,7 @@ export default function TransactionDescription() {
 
       <div className={styles.iconContainer}>
         <div className={styles.circleIcon}>
-          <img src="/d59ecf7928adf3ab5305.png" alt="Transaction status" />
+          <img src={CedraLogo} alt="Transaction status" />
         </div>
       </div>
       <div className={styles.statusContainer}>
@@ -110,7 +115,9 @@ export default function TransactionDescription() {
         </div>
         <div className={styles.detailBlock}>
           <div className={styles.label}>Data and time:</div>
-          <div className={styles.value}><b>{tx.date} {tx.time}</b></div>
+          <div className={styles.value}>
+            <b>{tx.date} {tx.time}</b>
+          </div>
         </div>
       </div>
     </div>

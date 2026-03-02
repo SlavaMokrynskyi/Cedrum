@@ -1,8 +1,24 @@
 import { NextActionMethod } from "../../core/types";
+import {
+  EXTENSION_POPUP_HEIGHT,
+  EXTENSION_POPUP_SIDE_OFFSET,
+  EXTENSION_POPUP_TOP_OFFSET,
+  EXTENSION_POPUP_WIDTH,
+} from "../../core/constants";
 import { getSenderFavicon, getSenderOrigin, getSenderUrl } from "./sender";
 import { getRequestKey } from "./requestUtils";
 
 const createPopupHandlers = (currRes) => {
+  const getExtensionUrl = () => chrome.runtime.getURL("index.html");
+
+  const getPopupPosition = (sender) => ({
+    top: EXTENSION_POPUP_TOP_OFFSET,
+    left: Math.max(
+      0,
+      (sender?.tab?.width || 1200) - EXTENSION_POPUP_SIDE_OFFSET,
+    ),
+  });
+
   const openUnlockWindowForAction = async (
     request,
     sender,
@@ -10,8 +26,7 @@ const createPopupHandlers = (currRes) => {
     nextAction,
   ) => {
     try {
-      // eslint-disable-next-line no-undef
-      const extensionURL = chrome.runtime.getURL("index.html");
+      const extensionURL = getExtensionUrl();
 
       const reqKey = getRequestKey(request, sender);
       currRes[reqKey] = sendResponse;
@@ -29,8 +44,8 @@ const createPopupHandlers = (currRes) => {
       await chrome.windows.create({
         url: `${extensionURL}?${searchParams.toString()}#/wallet/unlock`,
         type: type,
-        width: 360,
-        height: 640,
+        width: EXTENSION_POPUP_WIDTH,
+        height: EXTENSION_POPUP_HEIGHT,
         focused: true,
       });
     } catch (error) {
@@ -49,8 +64,7 @@ const createPopupHandlers = (currRes) => {
     accountAddress = null,
   ) => {
     try {
-      // eslint-disable-next-line no-undef
-      let extensionURL = chrome.runtime.getURL("index.html");
+      const extensionURL = getExtensionUrl();
       const requestKey = getRequestKey(request, sender);
       currRes[requestKey] = sendResponse;
       currRes[request.id] = sendResponse;
@@ -73,10 +87,9 @@ const createPopupHandlers = (currRes) => {
         chrome.windows.create({
           url: `${extensionURL}?${searchParams.toString()}#/popup/confirm-connect`,
           type: "popup",
-          width: 360,
-          height: 640,
-          top: 60,
-          left: Math.max(0, (sender?.tab?.width || 1200) - 300),
+          width: EXTENSION_POPUP_WIDTH,
+          height: EXTENSION_POPUP_HEIGHT,
+          ...getPopupPosition(sender),
           focused: true,
         });
       }
@@ -95,8 +108,7 @@ const createPopupHandlers = (currRes) => {
     accountAddress = null,
   ) => {
     try {
-      // eslint-disable-next-line no-undef
-      let extensionURL = chrome.runtime.getURL("index.html");
+      const extensionURL = getExtensionUrl();
       const requestKey = getRequestKey(request, sender);
       currRes[requestKey] = sendResponse;
       currRes[request.id] = sendResponse;
@@ -119,10 +131,9 @@ const createPopupHandlers = (currRes) => {
         chrome.windows.create({
           url: `${extensionURL}?${searchParams.toString()}#/popup/sign-transaction`,
           type: "popup",
-          width: 360,
-          height: 640,
-          top: 60,
-          left: Math.max(0, (sender?.tab?.width || 1200) - 300),
+          width: EXTENSION_POPUP_WIDTH,
+          height: EXTENSION_POPUP_HEIGHT,
+          ...getPopupPosition(sender),
           focused: true,
         });
       }
@@ -141,8 +152,7 @@ const createPopupHandlers = (currRes) => {
     accountAddress = null,
   ) => {
     try {
-      // eslint-disable-next-line no-undef
-      let extensionURL = chrome.runtime.getURL("index.html");
+      const extensionURL = getExtensionUrl();
       const requestKey = getRequestKey(request, sender);
       currRes[requestKey] = sendResponse;
       currRes[request.id] = sendResponse;
@@ -165,10 +175,9 @@ const createPopupHandlers = (currRes) => {
         chrome.windows.create({
           url: `${extensionURL}?${searchParams.toString()}#/popup/sign-message`,
           type: "popup",
-          width: 360,
-          height: 640,
-          top: 60,
-          left: Math.max(0, (sender?.tab?.width || 1200) - 300),
+          width: EXTENSION_POPUP_WIDTH,
+          height: EXTENSION_POPUP_HEIGHT,
+          ...getPopupPosition(sender),
           focused: true,
         });
       }

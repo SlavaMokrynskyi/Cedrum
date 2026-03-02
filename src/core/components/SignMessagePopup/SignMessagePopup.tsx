@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
 import styles from "./SignMessagePopup.module.css";
-import { CedrumLogoSvg } from "core/image/CedrumLogoSvg";
-import { CloseIconSvg } from "core/image/CloseIconSvg";
 import { MessageMethod } from "core/types";
 
 type ApprovalPreview = {

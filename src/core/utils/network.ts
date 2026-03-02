@@ -1,17 +1,27 @@
 // Copyright (c) Cedra
 // SPDX-License-Identifier: Apache-2.0
 
-import { WALLET_STATE_NETWORK_KEY } from "core/constants";
+import {
+  DEVNET_FAUCET_URL,
+  DEVNET_NODE_URL,
+  LOCAL_FAUCET_URL,
+  LOCAL_NODE_URL,
+  MAINNET_NODE_URL,
+  TESTNET_FAUCET_URL,
+  TESTNET_NODE_URL,
+  WALLET_STATE_NETWORK_KEY,
+} from "core/constants";
 import { Network } from "@cedra-labs/ts-sdk";
 
-export const DEVNET_NODE_URL = "https://devnet.cedra.dev/v1";
-export const TESTNET_NODE_URL = "https://testnet.cedra.dev/v1";
-export const MAINNET_NODE_URL = "https://mainnet.cedra.dev/v1";
-export const LOCAL_NODE_URL = "http://0.0.0.0:8080";
-
-export const DEVNET_FAUCET_URL = "https://devnet-faucet.cedra.dev/";
-export const TESTNET_FAUCET_URL = "https://faucet.cedra.dev/";
-export const LOCAL_FAUCET_URL = "http://0.0.0.0:8000";
+export {
+  DEVNET_NODE_URL,
+  TESTNET_NODE_URL,
+  MAINNET_NODE_URL,
+  LOCAL_NODE_URL,
+  DEVNET_FAUCET_URL,
+  TESTNET_FAUCET_URL,
+  LOCAL_FAUCET_URL,
+};
 
 export type CedraNetwork =
   | typeof Network.LOCAL
@@ -50,7 +60,7 @@ export async function getNetworkState(): Promise<CedraNetwork> {
     );
   } catch (error) {
     console.error(error);
-    return Network.DEVNET
+    return Network.DEVNET;
   }
 }
 
@@ -66,11 +76,11 @@ export const setNetworkState = async (network: CedraNetwork) => {
 
 export const removeNetworkState = async() => {
   try{
-    await chrome.storage.local.remove([WALLET_STATE_NETWORK_KEY])
+    await chrome.storage.local.remove([WALLET_STATE_NETWORK_KEY]);
   }catch(error){
-    console.error(error)
+    console.error(error);
   }
-}
+};
 
 
 function assertNeverNetwork(x: never): never {

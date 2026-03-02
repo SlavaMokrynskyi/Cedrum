@@ -1,41 +1,50 @@
 // core/hooks/useSidebarNavigation.ts
 import { PENDING_PAGE } from "core/constants";
-import { updateSidebarState, getSidebarState } from "core/utils/sidebar";
+import { getSidebarState, updateSidebarState } from "core/utils/sidebar";
 import { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 export const useSidebarNavigation = () => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
-
   const location = useLocation();
 
   useEffect(() => {
-    const getIsOpened = async () => {
-      setIsOpened(await getSidebarState());
+    let isMounted = true;
+
+    const syncSidebarState = async () => {
+      const nextState = await getSidebarState();
+
+      if (isMounted) {
+        setIsOpened(nextState);
+      }
     };
-    getIsOpened();
-  });
+
+    syncSidebarState();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [location.pathname]);
 
   const openInSidebar = useCallback(
     async (customPath?: string) => {
       if (!chrome.sidePanel) return;
 
-      // Використати customPath або поточний location.pathname
       const pathToOpen = customPath || location.pathname;
 
-      // Зберегти сторінку та стан
       await chrome.storage.local.set({
         [PENDING_PAGE]: pathToOpen,
       });
+
       setIsOpened(true);
-      updateSidebarState(true);
+      await updateSidebarState(true);
+
       await chrome.sidePanel
         .setPanelBehavior({
           openPanelOnActionClick: true,
         })
         .catch(console.error);
 
-      // Відкрити sidebar
       const [tab] = await chrome.tabs.query({
         active: true,
         currentWindow: true,
@@ -46,20 +55,24 @@ export const useSidebarNavigation = () => {
           windowId: tab.windowId,
         });
       }
+
       window.close();
     },
     [location.pathname],
   );
-  const openInPopup = async () => {
+
+  const openInPopup = useCallback(async () => {
     setIsOpened(false);
-    updateSidebarState(false);
+    await updateSidebarState(false);
+
     await chrome.sidePanel
       .setPanelBehavior({
         openPanelOnActionClick: false,
       })
       .catch(console.error);
+
     window.close();
-  };
+  }, []);
 
   return { openInSidebar, openInPopup, isOpened };
 };

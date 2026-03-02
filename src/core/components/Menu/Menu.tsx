@@ -6,18 +6,26 @@ import { ArrowLeftSvg } from "core/image/ArrowLeftSvg";
 import { useNavigate } from "react-router-dom";
 import useWalletState from "core/hooks/useWalletState";
 import { lockSessionNow } from "core/utils/lock";
+import {
+  CEDRA_WEBSITE_URL,
+  CEDRUM_BUG_REPORT_URL,
+  CEDRUM_WEBSITE_URL,
+} from "core/constants";
 
 interface ButtonItemProps {
-  label: string,
-  path?: string,
-  onClick?: () => void,
-  isDanger?: boolean,
+  label: string;
+  path?: string;
+  onClick?: () => void;
+  isDanger?: boolean;
+}
+
+const openExternalUrl = (url: string) => {
+  window.open(url, "_blank", "noopener,noreferrer");
 };
 
 export default function Menu() {
   const [accountName, setAccountName] = useState<string>("");
   const navigate = useNavigate();
-
   const { cedraAccount, getAccountInfoByAddress } = useWalletState();
 
   const handleBlock = async () => {
@@ -25,39 +33,43 @@ export default function Menu() {
     navigate("/");
   };
 
-  const ButtonsHandleOnClick = (item: ButtonItemProps) => {
+  const handleButtonClick = (item: ButtonItemProps) => {
     if (item.onClick) {
       item.onClick();
-    } else if (item.path) {
+      return;
+    }
+
+    if (item.path) {
       navigate(item.path);
     }
   };
 
   const topButtons: ButtonItemProps[] = [
     { label: "Wallet", path: "/wallet/wallet-page" },
-    { label: "CEDRA", onClick: () => window.open("https://cedra.network/", "_blank") },
+    { label: "CEDRA", onClick: () => openExternalUrl(CEDRA_WEBSITE_URL) },
   ];
 
   const groupButtons: ButtonItemProps[] = [
     { label: "My Account", path: "/wallet/account" },
     { label: "Language", path: "/wallet/language" },
-    { label: "Report a Bug", onClick: () => window.open("https://discord.gg/madPfnsj8f", "_blank") },
+    {
+      label: "Report a Bug",
+      onClick: () => openExternalUrl(CEDRUM_BUG_REPORT_URL),
+    },
     { label: "Block", onClick: handleBlock, isDanger: true },
   ];
 
   useEffect(() => {
-    const getData = async () => {
-      if (!cedraAccount) return;
-
-      const accoutntInfo = getAccountInfoByAddress(cedraAccount?.accountAddress.toString());
-
-      if (!accoutntInfo || !accoutntInfo.walletName) return;
-
-      setAccountName(accoutntInfo.walletName)
-    };
-    if (cedraAccount) {
-      getData();
+    if (!cedraAccount) {
+      setAccountName("");
+      return;
     }
+
+    const accountInfo = getAccountInfoByAddress(
+      cedraAccount.accountAddress.toString(),
+    );
+
+    setAccountName(accountInfo?.walletName || "");
   }, [cedraAccount, getAccountInfoByAddress]);
 
   return (
@@ -75,11 +87,11 @@ export default function Menu() {
 
       <div className={styles.menuContainer}>
         <div className={styles.topButtons}>
-          {topButtons.map((item, index) => (
+          {topButtons.map((item) => (
             <button
-              key={index}
+              key={item.label}
               className={styles.menuItem}
-              onClick={() => ButtonsHandleOnClick(item)}
+              onClick={() => handleButtonClick(item)}
             >
               <span className={styles.menuLabel}>{item.label}</span>
               <ArrowRightSvg className={styles.chevron} />
@@ -87,11 +99,11 @@ export default function Menu() {
           ))}
         </div>
         <div className={styles.groupBlock}>
-          {groupButtons.map((item, index) => (
+          {groupButtons.map((item) => (
             <button
-              key={index}
+              key={item.label}
               className={`${styles.groupItem} ${item.isDanger ? styles.danger : ""}`}
-              onClick={() => ButtonsHandleOnClick(item)}
+              onClick={() => handleButtonClick(item)}
             >
               <span className={styles.menuLabel}>{item.label}</span>
               <ArrowRightSvg className={styles.chevron} />
@@ -100,9 +112,7 @@ export default function Menu() {
         </div>
         <button
           className={styles.bottomItem}
-          onClick={() =>
-            window.open("https://cedrum-wallet.vercel.app", "_blank")
-          }
+          onClick={() => openExternalUrl(CEDRUM_WEBSITE_URL)}
         >
           <span className={styles.menuLabel}>O Cedrum</span>
         </button>

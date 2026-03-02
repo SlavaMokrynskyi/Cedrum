@@ -8,15 +8,15 @@ import CedraLogo from "core/image/CedraLogo.png";
 import { useSidebarNavigation } from "core/hooks/useSidebarNavigation";
 import useWalletState from "core/hooks/useWalletState";
 import { useClipboard } from "@chakra-ui/react";
+import { DEFAULT_TOKEN_NAME } from "core/constants";
 
 export default function TopBarPortfolio() {
   const [modalActive, setModalActive] = useState(false);
 
   const { cedraAccount } = useWalletState();
-  const { openInSidebar,isOpened,openInPopup } = useSidebarNavigation();
-
+  const { openInSidebar, isOpened, openInPopup } = useSidebarNavigation();
   const { hasCopied, onCopy } = useClipboard(
-    cedraAccount?.accountAddress.toString()!,
+    cedraAccount?.accountAddress.toString() ?? "",
   );
 
   return (
@@ -34,11 +34,11 @@ export default function TopBarPortfolio() {
         <div className={styles.pillWrapper}>
           <div className={styles.pill} role="group" aria-label="Network">
             <div className={styles.pillLeft}>
-              <img className={styles.pillLeftLogo} src={CedraLogo} alt=""></img>
+              <img className={styles.pillLeftLogo} src={CedraLogo} alt="" />
             </div>
 
             <div className={styles.pillCenter}>
-              <span className={styles.title}>Cedra</span>
+              <span className={styles.title}>{DEFAULT_TOKEN_NAME}</span>
             </div>
 
             <button
@@ -50,20 +50,21 @@ export default function TopBarPortfolio() {
               <CopyAddressIconSvg className={styles.copyIcon} />
             </button>
           </div>
-          {hasCopied && (
-            <div className={styles.copyMessage}>
-              Copied!
-            </div>
-          )}
+          {hasCopied && <div className={styles.copyMessage}>Copied!</div>}
         </div>
         <div className={styles.rightSection}>
           <button
             className={styles.iconBtn}
             onClick={() => {
-              isOpened ? openInPopup() : openInSidebar()
+              if (isOpened) {
+                void openInPopup();
+                return;
+              }
+
+              void openInSidebar();
             }}
             type="button"
-            aria-label="Open sidebar"
+            aria-label={isOpened ? "Open popup" : "Open sidebar"}
           >
             <SideBarIconSvg className={styles.sidebarIcon} />
           </button>

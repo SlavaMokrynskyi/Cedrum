@@ -5,6 +5,11 @@ import SelectTokenTopBar from "core/components/SelectTokenTopBar/SelectTokenTopB
 import SearchInput from "core/components/SearchInput/SearchInput";
 import TokenSelectItem from "core/components/TokenSelectItem/TokenSelectItem";
 import NavBar from "core/components/NavBar/NavBar";
+import {
+  DEFAULT_TOKEN_ID,
+  DEFAULT_TOKEN_NAME,
+  DEFAULT_TOKEN_SYMBOL,
+} from "core/constants";
 
 interface Token {
   id: string;
@@ -16,7 +21,12 @@ interface Token {
 }
 
 const defaultTokens: Token[] = [
-  { id: "1", name: "Cedra", symbol: "CED", balance: 0.0000 },
+  {
+    id: DEFAULT_TOKEN_ID,
+    name: DEFAULT_TOKEN_NAME,
+    symbol: DEFAULT_TOKEN_SYMBOL,
+    balance: 0,
+  },
 ];
 
 export default function SendSelectToken() {
@@ -33,11 +43,11 @@ export default function SendSelectToken() {
     );
   }, [searchQuery]);
 
-  const handleTokenClick = () => {
+  const handleTokenClick = (symbol: string) => {
     navigate("/wallet/send-token", {
-      state : {
-        symbol : defaultTokens[0].symbol
-      }
+      state: {
+        symbol,
+      },
     });
   };
 
@@ -60,7 +70,7 @@ export default function SendSelectToken() {
               balance={token.balance}
               balanceLabel={token.balanceLabel}
               icon={token.icon}
-              onClick={handleTokenClick}
+              onClick={() => handleTokenClick(token.symbol)}
             />
           ))}
         </div>

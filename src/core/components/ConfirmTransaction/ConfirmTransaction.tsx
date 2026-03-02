@@ -8,6 +8,7 @@ import {
   simulateTransaction,
 } from "core/mutations/transaction";
 import useWalletState from "core/hooks/useWalletState";
+import { CEDRA_OCTAS_PER_COIN } from "core/constants";
 import {
   Account,
   AccountAddress,
@@ -44,11 +45,10 @@ export default function ConfirmTransaction() {
             nodeUrl: cedraNetwork,
             entryFunctionPayload: {
               function: "0x1::cedra_account::transfer",
-              functionArguments: [to, Number(amount * 100_000_000)],
+              functionArguments: [to, Number(amount * CEDRA_OCTAS_PER_COIN)],
             },
             publicKey : cedraAccount.publicKey,
           });
-          console.log("simulated txn : ",simulatedTxn);
           setSimulatedTxn(simulatedTxn);
           setAccount(fromAccount);
         } catch (err: any) {
@@ -69,7 +69,7 @@ export default function ConfirmTransaction() {
     
     try {
       const submittedTxn = await sendCoinTransaction({
-        amount: Number(amount * 100_000_000),
+        amount: Number(amount * CEDRA_OCTAS_PER_COIN),
         fromAccount: account,
         nodeUrl: cedraNetwork,
         toAddress: AccountAddress.fromString(to),
@@ -124,7 +124,9 @@ export default function ConfirmTransaction() {
           <div className={styles.row}>
             <span className={styles.label}>Fees:</span>
             <span className={styles.value}>
-              {(Number(simulatedTxn?.gas_used) / 100_000_000) < 0.0000001 ? "<0.0000001" :  (Number(simulatedTxn?.gas_used) / 100_000_000)} {symbol}
+              {(Number(simulatedTxn?.gas_used) / CEDRA_OCTAS_PER_COIN) < 0.0000001
+                ? "<0.0000001"
+                : (Number(simulatedTxn?.gas_used) / CEDRA_OCTAS_PER_COIN)} {symbol}
             </span>
           </div>
         </div>

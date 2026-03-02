@@ -17,7 +17,7 @@
 
     /* SIDEBAR */
     --color-bg-sidebar: #0E0F14;
-    --color-text-sidebar: "#FFFFFFC7 78%";
+    --color-text-sidebar: rgba(255, 255, 255, 0.78);
 
     /* COLORS */
     --color-text-succeed: #02B471;

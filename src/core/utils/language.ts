@@ -1,8 +1,8 @@
-import { LANGUAGE } from "core/constants";
+import { DEFAULT_LANGUAGE, LANGUAGE } from "core/constants";
 import { UpdateLanguageProps } from "core/hooks/useWalletState";
 
 const setLanguageToChromeStorage = async (language: UpdateLanguageProps | null) => {
-  await chrome.storage.local.set({ language: JSON.stringify(language) });
+  await chrome.storage.local.set({ [LANGUAGE]: JSON.stringify(language) });
 };
 
 const getLanguageFromChromeStorage = async () => {
@@ -11,16 +11,10 @@ const getLanguageFromChromeStorage = async () => {
 
     return item[LANGUAGE]
       ? JSON.parse(item[LANGUAGE])
-      : {
-          name: "English",
-          shortName: "EN",
-        };
+      : DEFAULT_LANGUAGE;
   } catch (error) {
     console.log(error);
-    return {
-      name: "English",
-      shortName: "EN",
-    };
+    return DEFAULT_LANGUAGE;
   }
 };
 
@@ -40,7 +34,7 @@ export const removeLanguageState = async() =>{
 }
 export const languages = [
   {
-    name: "English",
-    shortName: "EN",
+    name: DEFAULT_LANGUAGE.name,
+    shortName: DEFAULT_LANGUAGE.shortName,
   },
 ];

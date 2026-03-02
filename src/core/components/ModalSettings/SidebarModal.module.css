@@ -133,10 +133,19 @@
 }
 
 .chevron {
-  font-size: 22px;
-  line-height: 1;
+  width: 18px;
+  height: 18px;
+  display: block;
   color: var(--color-muted);
-  transform: translateY(-1px);
+  opacity: 0.72;
+  flex-shrink: 0;
+  transition: transform 0.18s ease, opacity 0.18s ease, color 0.18s ease;
+}
+
+.menuItem:hover .chevron {
+  color: var(--color-text);
+  opacity: 0.96;
+  transform: translateX(2px);
 }
 
 .danger {

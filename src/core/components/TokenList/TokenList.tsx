@@ -1,6 +1,11 @@
 import React from "react";
 import styles from "./TokenList.module.css";
 import TokenItem from "../TokenItem/TokenItem";
+import {
+  DEFAULT_TOKEN_ID,
+  DEFAULT_TOKEN_NAME,
+  DEFAULT_TOKEN_SYMBOL,
+} from "core/constants";
 
 interface Token {
   id: string;
@@ -22,11 +27,11 @@ interface TokenListProps {
 
 const defaultTokens: Token[] = [
   {
-    id: "1",
+    id: DEFAULT_TOKEN_ID,
     chain: "cedra",
     chainId: 1,
-    name: "Cedra",
-    symbol: "CED",
+    name: DEFAULT_TOKEN_NAME,
+    symbol: DEFAULT_TOKEN_SYMBOL,
     balance: 0,
     value: 0,
     changePercentage: 0,
@@ -36,7 +41,7 @@ const defaultTokens: Token[] = [
 export default function TokenList({ tokens = defaultTokens,balance,cedraPrice }: TokenListProps) {
   return (
     <div className={styles.container}>
-      {defaultTokens.map((token) => (
+      {tokens.map((token) => (
         <TokenItem
           key={token.id}
           name={token.name}

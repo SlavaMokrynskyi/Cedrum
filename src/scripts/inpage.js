@@ -83,6 +83,6 @@ const cedrum = new Web3();
 
 cedrum.isCedrum = true;
 cedrum.isWallet = true;
-cedrum.version = "0.2.0";
+cedrum.version = __APP_VERSION__;
 
 window.cedrum = cedrum;

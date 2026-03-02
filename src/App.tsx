@@ -1,11 +1,11 @@
-import React, { lazy, Suspense, useEffect } from "react";
+import React, { ElementType, lazy, Suspense, useEffect } from "react";
 import PageIsLoading from "core/components/PageIsLoading/PageIsLoading";
 import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
   HashRouter,
+  Navigate,
+  Route,
+  Routes,
+  useNavigate,
 } from "react-router-dom";
 import WalletLayout from "core/layouts/WalletLayout/WalletLayout";
 import { PENDING_PAGE } from "core/constants";
@@ -22,10 +22,10 @@ const SettingsPage = lazy(() => import("pages/SettingsPage"));
 const MyAccountPage = lazy(() => import("pages/MyAccountPage"));
 const LogOutPage = lazy(() => import("pages/LogOutPage"));
 const RegistrationLoginPage = lazy(() => import("pages/RegistrationLoginPage"));
-const SecretRecoveryPhrasePage = lazy(() => import("pages/SecretRecoveryPhrasePage"),);
+const SecretRecoveryPhrasePage = lazy(() => import("pages/SecretRecoveryPhrasePage"));
 const CreatePasswordPage = lazy(() => import("pages/CreatePasswordPage"));
 const EnterPasswordPage = lazy(() => import("pages/EnterPasswordPage"));
-const EnterRecoveryPhrasePage = lazy(() => import("pages/EnterRecoveryPhrasePage"),);
+const EnterRecoveryPhrasePage = lazy(() => import("pages/EnterRecoveryPhrasePage"));
 const WelcomePage = lazy(() => import("pages/WelcomePage"));
 const WalletPage = lazy(() => import("pages/WalletPage"));
 const ChangePasswordPage = lazy(() => import("pages/ChangePasswordPage"));
@@ -47,19 +47,71 @@ interface AppProps {
   isSidePanel?: boolean;
 }
 
+type RouteConfig = {
+  path: string;
+  Component: ElementType;
+};
+
+const walletRoutes: RouteConfig[] = [
+  { path: "portfolio", Component: PortfolioPage },
+  { path: "nft", Component: NFTPage },
+  { path: "nft-description", Component: NFTDescriptionPage },
+  { path: "search", Component: SearchPage },
+  { path: "send-select-token", Component: SendSelectTokenPage },
+  { path: "send-token", Component: SendTokenPage },
+  { path: "confirm-transaction", Component: ConfirmTransactionPage },
+  { path: "success", Component: SuccessPage },
+  { path: "menu", Component: MenuPage },
+  { path: "settings", Component: SettingsPage },
+  { path: "account", Component: MyAccountPage },
+  { path: "logout", Component: LogOutPage },
+  { path: "create-password", Component: CreatePasswordPage },
+  { path: "settings/change-password", Component: ChangePasswordPage },
+  { path: "wallet-page", Component: WalletPage },
+  { path: "unlock", Component: UnlockPage },
+  { path: "transactions", Component: TransactionsPage },
+  { path: "transaction/:hash", Component: TransactionDescriptionPage },
+  { path: "page-is-loading", Component: PageIsLoadingPage },
+  { path: "select-token", Component: SelectTokenPage },
+  { path: "language", Component: LanguagePage },
+  { path: "receive", Component: Receive },
+  { path: "send-nft", Component: SendNFTPage },
+  { path: "will-be-soon", Component: WillBeSoonPage },
+];
+
+const standaloneRoutes: RouteConfig[] = [
+  { path: "/auth", Component: RegistrationLoginPage },
+  { path: "/popup/confirm-connect", Component: ConfirmConnectPage },
+  { path: "/popup/sign-transaction", Component: SignTxnPopupPage },
+  { path: "/popup/sign-message", Component: SignMessagePopupPage },
+  { path: "/auth/enter-password", Component: EnterPasswordPage },
+  { path: "/auth/recovery-phrase", Component: SecretRecoveryPhrasePage },
+  { path: "/auth/enter-recovery-phrase", Component: EnterRecoveryPhrasePage },
+];
+
 const SidePanelNavigator: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    chrome.storage.local.get([PENDING_PAGE], (result) => {
+    let isMounted = true;
+
+    const syncPendingRoute = async () => {
+      const result = await chrome.storage.local.get([PENDING_PAGE]);
       const pending = result[PENDING_PAGE];
 
-      if (typeof pending === "string") {
-        chrome.storage.local.remove([PENDING_PAGE], () => {
-          navigate(pending, { replace: true });
-        });
+      if (!isMounted || typeof pending !== "string") {
+        return;
       }
-    });
+
+      await chrome.storage.local.remove([PENDING_PAGE]);
+      navigate(pending, { replace: true });
+    };
+
+    syncPendingRoute().catch(console.error);
+
+    return () => {
+      isMounted = false;
+    };
   }, [navigate]);
 
   return null;
@@ -75,62 +127,16 @@ const App = ({ isSidePanel = false }: AppProps) => {
           <Route path="/" element={<WelcomePage />} />
 
           <Route path="/wallet" element={<WalletLayout />}>
-            <Route path="portfolio" element={<PortfolioPage />} />
-            <Route path="nft" element={<NFTPage />} />
-            <Route path="nft-description" element={<NFTDescriptionPage />} />
-            <Route path="search" element={<SearchPage />} />
-            <Route path="send-select-token" element={<SendSelectTokenPage />} />
-            <Route path="send-token" element={<SendTokenPage />} />
-            <Route path="confirm-transaction" element={<ConfirmTransactionPage />} />
-            <Route path="success" element={<SuccessPage />} />
-            <Route path="menu" element={<MenuPage />} />
-            <Route path="settings" element={<SettingsPage />} />
-            <Route path="account" element={<MyAccountPage />} />
-            <Route path="logout" element={<LogOutPage />} />
-            <Route path="create-password" element={<CreatePasswordPage />} />
-            <Route path="settings/change-password" element={<ChangePasswordPage />} />
-            <Route path="wallet-page" element={<WalletPage />} />
-            <Route path="unlock" element={<UnlockPage />} />
-            <Route path="transactions" element={<TransactionsPage />} />
-            <Route path="transaction/:hash" element={<TransactionDescriptionPage />} />
-            <Route path="page-is-loading" element={<PageIsLoadingPage />} />
-            <Route path="confirm-transaction" element={<ConfirmTransactionPage />} />
-            <Route path="send-select-token" element={<SendSelectTokenPage />} />
-            <Route path="success" element={<SuccessPage />} />
-            <Route path="send-token" element={<SendTokenPage />} />
-            <Route path="page-is-loading" element={<PageIsLoadingPage />} />
-            <Route path="confirm-transaction" element={<ConfirmTransactionPage />} />
-            <Route path="select-token" element={<SelectTokenPage />} />
-            <Route path="send-select-token" element={<SendTokenPage />} />
-            <Route path="success" element={<SuccessPage />} />
-            <Route path="send-token" element={<SendTokenPage />} />
-            <Route path="language" element={<LanguagePage />} />
-            <Route path="receive" element={<Receive />} />
-            <Route path="send-nft" element={<SendNFTPage />} />
-            <Route path="will-be-soon" element={<WillBeSoonPage />} />
+            {walletRoutes.map(({ path, Component }) => (
+              <Route key={path} path={path} element={<Component />} />
+            ))}
           </Route>
 
-          <Route path="/auth" element={<RegistrationLoginPage />} />
-          <Route path="/popup/confirm-connect" element={<ConfirmConnectPage />} />
-          <Route path="/popup/sign-transaction" element={<SignTxnPopupPage />} />
-          <Route path="/popup/sign-message" element={<SignMessagePopupPage />} />
-          <Route
-            path="/auth/enter-password"
-            element={<EnterPasswordPage />}
-          />
-          <Route
-            path="/auth/recovery-phrase"
-            element={<SecretRecoveryPhrasePage />}
-          />
-          <Route
-            path="/auth/enter-recovery-phrase"
-            element={<EnterRecoveryPhrasePage />}
-          />
+          {standaloneRoutes.map(({ path, Component }) => (
+            <Route key={path} path={path} element={<Component />} />
+          ))}
 
-          <Route
-            path="*"
-            element={<Navigate to="/wallet/portfolio" replace />}
-          />
+          <Route path="*" element={<Navigate to="/wallet/portfolio" replace />} />
         </Routes>
       </Suspense>
     </HashRouter>

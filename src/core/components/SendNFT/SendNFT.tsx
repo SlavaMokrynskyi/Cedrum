@@ -82,7 +82,6 @@ export default function SendNFT() {
                 transactionHash: pending.hash,
                 options: { timeoutSecs: 120, checkSuccess: true },
             });
-            console.log("Transfer successful:", response);
             setSendLoading(false);
             navigate("/wallet/success");
         } catch (error: any) {

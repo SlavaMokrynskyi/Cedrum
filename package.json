@@ -1,6 +1,6 @@
 {
   "name": "web-wallet",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
     "@cedra-labs/ts-sdk": "^2.2.8",
@@ -24,10 +24,10 @@
     "lint": "tsc --noEmit",
     "lint:fix": "tsc --noEmit",
     "tauri": "tauri",
-    "prebuild": "rimraf build",
+    "prebuild": "rimraf build public/build",
     "build": "npm run lint:fix && npm run build:app && npm run build:sidebar && npm run build:scripts",
     "build:tauri": "npm run tauri -- build --target aarch64-apple-darwin",
-    "build:app": "vite build --outDir build",
+    "build:app": "vite build",
     "build:sidebar": "webpack --config webpack.sidepanel.config.js",
     "build:bg": "webpack --config webpack.scripts.config.js --entry ./src/scripts/background.js --output-filename background.js",
     "build:inpage": "webpack --config webpack.scripts.config.js --entry ./src/scripts/inpage.js --output-filename inpage.js",

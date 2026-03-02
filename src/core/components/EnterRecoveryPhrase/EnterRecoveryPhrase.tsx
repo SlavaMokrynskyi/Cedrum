@@ -14,6 +14,7 @@ import { unlockSession } from "core/utils/lock";
 import { ArrowLeftSvg } from "core/image/ArrowLeftSvg";
 import styles from "./EnterRecoveryPhrase.module.css";
 import { createWalletsStates, getAccountExists } from "core/queries/account";
+import { closeFullscreenExtensionView } from "core/utils/extensionView";
 
 export default function EnterRecoveryPhrase() {
     const [inputFields, setInputFields] = useState<(null | string)[]>(
@@ -28,13 +29,10 @@ export default function EnterRecoveryPhrase() {
     const {password} = location.state || {};
     const { cedraNetwork, createWalletState } = useWalletState();
 
-    const finishRegistration = () => {
-        const isFullScreenWindow =
-            window.outerWidth >= window.screen.availWidth &&
-            window.outerHeight >= window.screen.availHeight;
+    const finishRegistration = async () => {
+        const isClosed = await closeFullscreenExtensionView();
 
-        if (isFullScreenWindow) {
-            window.close();
+        if (isClosed) {
             return;
         }
 
@@ -45,7 +43,6 @@ export default function EnterRecoveryPhrase() {
         try {
             setIsLoading(true);
             const recoveryPhrase = inputFields.join(" ");
-            console.log("recovery phrase", recoveryPhrase)
             const account = Account.fromDerivationPath({
                 path: `${PATH_CEDRA_COIN}/0'`,
                 mnemonic: recoveryPhrase,
@@ -71,12 +68,12 @@ export default function EnterRecoveryPhrase() {
                 {
                     account: account,
                     path: `${PATH_CEDRA_COIN}/0'`,
-                    walletName: "Wallet 1",
+                    walletName: null,
                 },
             );
             await setMnemonicVault(recoveryPhrase, password);
             await unlockSession(password);
-            finishRegistration();
+            await finishRegistration();
         } catch (error) {
             console.error(error);
             toast({

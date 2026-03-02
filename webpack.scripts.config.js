@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const { version: appVersion } = require('./package.json');
 
 module.exports = {
   mode: 'production',
@@ -37,6 +38,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production'),
+      __APP_VERSION__: JSON.stringify(appVersion),
     }),
   ],
   module: {
@@ -57,6 +59,6 @@ module.exports = {
   optimization: {
     usedExports: true,
     minimize: true,
-    concatenateModules: false,
+    concatenateModules: true,
   },
 };

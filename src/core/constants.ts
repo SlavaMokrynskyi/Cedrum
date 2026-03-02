@@ -20,6 +20,25 @@ export const ENCRYPTED_MNEMONIC_VAULT = "mnemonicPhraseVault";
 export const SESSION_VAULT_KEY = "sessionVaultKey";
 export const ACTIVE_INDEXES = "activeIndexes";
 
+export const DEFAULT_LANGUAGE = Object.freeze({
+  name: "English",
+  shortName: "EN",
+});
+export const DEFAULT_ACCOUNT_NAME = "Account 1";
+export const DEFAULT_TOKEN_ID = "cedra";
+export const DEFAULT_TOKEN_NAME = "Cedra";
+export const DEFAULT_TOKEN_SYMBOL = "CED";
+export const CEDRA_OCTAS_PER_COIN = 100_000_000;
+export const EXTENSION_POPUP_WIDTH = 360;
+export const EXTENSION_POPUP_HEIGHT = 640;
+export const EXTENSION_POPUP_TOP_OFFSET = 60;
+export const EXTENSION_POPUP_SIDE_OFFSET = 300;
+export const CEDRA_WEBSITE_URL = "https://cedra.network/";
+export const CEDRUM_WEBSITE_URL = "https://cedrum-wallet.vercel.app";
+export const CEDRUM_BUG_REPORT_URL = "https://discord.gg/madPfnsj8f";
+export const CEDRASCAN_TX_URL = "https://cedrascan.com/txn";
+export const CRYPTORANK_FALLBACK_COIN = "tether";
+
 export const CREATE_COLLECTION_SCRIPT = "0x3::token::create_collection_script";
 export const CREATE_TOKEN_SCRIPT = "0x3::token::create_token_script";
 export const COIN_TRANSFER = "0x1::coin::transfer";

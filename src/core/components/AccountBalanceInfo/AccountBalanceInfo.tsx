@@ -2,15 +2,13 @@ import React, { useEffect, useState } from "react";
 import styles from "./AccountBalanceInfo.module.css";
 
 interface Props{
-  balance: Number;
+  balance: number;
   dailyChange: number;
   dailyPercentage: number;
 }
 
 export default function AccountBalanceInfo({balance,dailyChange,dailyPercentage} : Props) {
   const[isPositive, setIsPositive] = useState<boolean>(true);
-
-  console.log(balance, " type : ", typeof(balance))
 
   useEffect(()=>{
     setIsPositive(dailyChange >= 0)

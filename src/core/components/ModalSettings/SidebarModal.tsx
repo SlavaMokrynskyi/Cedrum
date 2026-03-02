@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./SidebarModal.module.css";
 import { CedrumLogoSvg } from "core/image/CedrumLogoSvg";
+import { ArrowRightSvg } from "core/image/ArrowRightSvg";
 import { useNavigate } from "react-router-dom";
 import { useSidebarNavigation } from "core/hooks/useSidebarNavigation";
 import { lockSessionNow } from "core/utils/lock";
 import useWalletState from "core/hooks/useWalletState";
 import { getAccountBalance } from "core/utils/helper";
+import {
+  CEDRA_OCTAS_PER_COIN,
+  DEFAULT_ACCOUNT_NAME,
+} from "core/constants";
 
 type Props = {
   open: boolean;
@@ -21,27 +26,31 @@ export default function SidebarModal({ open, onClose }: Props) {
   useEffect(() => {
     const fetchBalance = async () => {
       if (!cedraAccount || !cedraNetwork) return;
+
       try {
-        const bal = await getAccountBalance(cedraAccount.accountAddress, cedraNetwork);
-        const usdBalance = (Number(bal) / 100_000_000).toFixed(2);
+        const bal = await getAccountBalance(
+          cedraAccount.accountAddress,
+          cedraNetwork,
+        );
+        const usdBalance = (Number(bal) / CEDRA_OCTAS_PER_COIN).toFixed(2);
         setBalance(`$${usdBalance}`);
       } catch {
         setBalance("$0.00");
       }
     };
+
     fetchBalance();
   }, [cedraAccount, cedraNetwork]);
 
-  const accountInfo = cedraAccount 
+  const accountInfo = cedraAccount
     ? getAccountInfoByAddress(cedraAccount.accountAddress.toString())
     : null;
-  const accountName = accountInfo?.walletName || "Account 1";
+  const accountName = accountInfo?.walletName || DEFAULT_ACCOUNT_NAME;
 
-  const handleBlock = async() => {
-    await lockSessionNow()
-    navigate("/")
-  }
-
+  const handleBlock = async () => {
+    await lockSessionNow();
+    navigate("/", { replace: true });
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -86,16 +95,16 @@ export default function SidebarModal({ open, onClose }: Props) {
           onClick={() => navigate("/wallet/menu")}
         >
           <span>Menu</span>
-          <span className={styles.chevron}>›</span>
+          <ArrowRightSvg className={styles.chevron} />
         </button>
 
         <button
           type="button"
           className={styles.menuItem}
-          onClick={() => openInSidebar()}
+          onClick={() => void openInSidebar()}
         >
           <span>Sidebar Extension</span>
-          <span className={styles.chevron}>›</span>
+          <ArrowRightSvg className={styles.chevron} />
         </button>
 
         <div className={styles.divider} />
